@@ -1,13 +1,14 @@
 package com.valdez.application
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : ComponentActivity() {
     private lateinit var layout: LinearLayout
@@ -18,7 +19,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         layout = findViewById(R.id.activity_main)
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         }
 
         btnSnackBar.setOnClickListener {
-
+            showSnackBar()
         }
 
         btnToast.setOnClickListener {
@@ -47,8 +47,16 @@ class MainActivity : ComponentActivity() {
             .setIcon(R.drawable.baseline_warning_24).setNegativeButton("No") { dialogInterface, _ ->
                 dialogInterface.cancel()
             }.setPositiveButton("Yes") { _, _ ->
-                textView.text = "Is this halal?"
+                println("Hell yeah")
             }.setCancelable(false)
         alertDialog.create().show()
+    }
+
+    private fun showSnackBar() {
+        val snackBar = Snackbar.make(layout, "This is a snack bar.", Snackbar.LENGTH_LONG)
+        snackBar.setAction("Open") {
+            val secondaryActivity = Intent(this, SecondaryActivity::class.java)
+            startActivity(secondaryActivity)
+        }.show()
     }
 }
