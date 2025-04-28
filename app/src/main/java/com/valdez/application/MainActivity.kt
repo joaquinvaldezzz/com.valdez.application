@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                 dialogInterface.cancel()
             }.setPositiveButton("Yes") { _, _ ->
                 textView.text = "Is this halal?"
-            }
+            }.setCancelable(false)
         alertDialog.create().show()
     }
 }
